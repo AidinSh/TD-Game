@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    private Transform target;
-
+    [Header("Attribues : ")]
     public float bulletSpeed = 70f;
+
+    [Header("Setup Items : ")]
+    public GameObject bulletImpact;
+    private Transform target;
+    
 
 	public void Seek (Transform _target)
     {
@@ -34,6 +38,9 @@ public class Bullet : MonoBehaviour {
 
     void hitTarget()
     {
-        Debug.Log("hit target");
+        GameObject temporaryBulletImpact = (GameObject)Instantiate(bulletImpact, transform.position, transform.rotation);
+        Destroy(temporaryBulletImpact, 2f);
+
+        Destroy(gameObject); 
     }
 }
