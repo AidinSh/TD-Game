@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
     [Header("Attribues : ")]
     public float bulletSpeed = 70f;
+    public float explosionRadius = 0f;
 
     [Header("Setup Items : ")]
     public GameObject bulletImpact;
@@ -34,13 +35,45 @@ public class Bullet : MonoBehaviour {
             return;
         }
         transform.Translate(dir.normalized * dynamicDistance , Space.World);
+        transform.LookAt(target);
 	}
 
     void hitTarget()
     {
         GameObject temporaryBulletImpact = (GameObject)Instantiate(bulletImpact, transform.position, transform.rotation);
         Destroy(temporaryBulletImpact, 2f);
+        
+        if ( explosionRadius > 0)
+        {
+            explode();
+        }
+        else
+        {
+            damage(target);
+        }
+        Destroy(gameObject);
+    }
 
-        Destroy(gameObject); 
+    void explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
+        {
+            if ( collider.tag == "Enemy")
+            {
+                damage(collider.transform);
+            }
+        }
+    }
+
+    void damage(Transform enemy)
+    {
+        Destroy(enemy.gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

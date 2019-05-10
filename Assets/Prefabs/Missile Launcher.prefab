@@ -262,6 +262,6 @@ MonoBehaviour:
   fireRate: 0.25
   rotatingNeck: {fileID: 4509264450017820}
   target: {fileID: 0}
-  bulletPrefab: {fileID: 1582840910441712, guid: d7eb003c8063e5b4384d058900580acf,
+  bulletPrefab: {fileID: 1563945980730086, guid: e9d3ec0252ca800499bbea5c8c7f1765,
     type: 2}
   firePoint: {fileID: 4683348622372172}
