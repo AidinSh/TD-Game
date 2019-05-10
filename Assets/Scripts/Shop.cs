@@ -5,19 +5,21 @@ using UnityEngine;
 public class Shop : MonoBehaviour {
 
     turretBuildManager buildManager;
+    public turretBluePrint standardTurret;
+    public turretBluePrint missileLauncher;
 
     private void Start()
     {
         buildManager = turretBuildManager.instance;
     }
 
-    public void purchaseStandardTurret()
+    public void selectStandardTurret()
     {
-        buildManager.setTurretToBuild(buildManager.standardTurretPrefab);
+        buildManager.selectTurretToBuild(standardTurret);
     }
 
-    public void purchaseMissileLauncher()
+    public void selectMissileLauncher()
     {
-        buildManager.setTurretToBuild(buildManager.missileLauncherPrefab);
+        buildManager.selectTurretToBuild(missileLauncher);
     }
 }
